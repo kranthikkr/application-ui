@@ -1,0 +1,117 @@
+
+  <!-- <button type="button" (click)="loadClass('Java Team')" > Load Default Class </button>  -->
+   <!-- <button type="button" (click)="resetClassForm()"> Reset </button>  -->
+
+
+<!-- <div class="class"> -->
+ <form style="background-color:Silver" [formGroup]="classForm" (ngSubmit)="onFormSubmit()">
+     <div >
+     <h1><font color="Olive">Create New Class</font> </h1>
+   <p><b>ClassName</b> : <input type="text" formControlName="className" >
+     <br/><label *ngIf="classForm.get('className').invalid && classForm.get('className').dirty && classForm.get('className').touched" class = "error"> Class Name is required. </label>
+   </p>
+   <p><b>package Name</b> : <input type="text" formControlName="packageName"><label *ngIf="classForm.get('packageName').invalid && classForm.get('packageName').dirty" class = "error"> Package Name is required. </label></p>
+   </div>
+   <div class="all-field">
+     <b><h1><font color="Olive"> Fields :</font></h1></b><br><br>
+     <div formArrayName="fields">
+
+      <div *ngFor="let field of fieldFormArray.controls; let i=index" 
+            [formGroupName]="i">
+
+         <p><b>Field Type</b> : <input type="text" formControlName="fieldType"><label *ngIf="field.get('fieldType').invalid && field.get('fieldType').dirty" class = "error"> Field type is required. </label><br/>
+   </p>
+	 <p><b>Field Name</b> : <input formControlName="fieldName"><label *ngIf="field.get('fieldName').invalid && field.get('fieldName').dirty" class = "error"> Field Name is required. </label><br/></p>
+      <p><b>Visibility</b> : <input formControlName="visibility"></p>
+       <p><b>Modifiers :</b> <input formControlName="modifiers"></p>
+        <p><b>InitCode :</b> <input formControlName="initCode"></p>
+
+          <button style="background-color:Silver"(click)="deleteField(i)">Delete</button>
+     
+      </div>
+  </div>
+ </div>
+  <button style="background-color:Gray" (click)="addField()">Add Field</button>
+  
+     <!-- <div formArrayName="fields"> 
+          <div *ngFor = "let field of fieldFormArray.controls; let idx = index" [formGroupName]="idx" class="field">
+	      <p> <b>Field : {{idx + 1}}</b> </p> -->
+          <!-- <div formArrayName="fields"
+           *ngFor="let field of classForm.get('fields').controls; let i = index" [formGroupName]="i" class="field">
+            <p> <b>Field : {{i + 1}}</b> </p> 
+                  <div [formGroupName]="i">
+	 <p>Field Type : <input type="text" formControlName="fieldType"><label *ngIf="field.get('fieldType').invalid && field.get('fieldType').dirty" class = "error"> Field type is required. </label><br/>
+   </p>
+	 <p>Field Name : <input formControlName="fieldName"><label *ngIf="field.get('fieldName').invalid && field.get('fieldName').dirty" class = "error"> Field Name is required. </label><br/></p>
+      <p>Visibility : <input formControlName="visibility"></p>
+       <p>Modifiers : <input formControlName="modifiers"></p>
+        <p>InitCode : <input formControlName="initCode"></p>
+  
+   <p><button type="button" (click)="deleteField(i)">Delete</button></p> 
+	  </div>
+    </div>
+     
+     <button type="button" (click)="addField()">Add More Field</button>
+ </div><br/> -->
+   <!-- <div class="all-method">
+     <b> Methods :</b><br><br>
+     <div formArrayName="methods"> 
+          <div *ngFor = "let method of methodFormArray.controls; let idx = index" [formGroupName]="idx" class="method">
+	      <p> <b>Method : {{idx + 1}}</b> </p>
+          <div formArrayName="methods"
+  *ngFor="let method of classForm.get('methods').controls; let i = index" [formGroupName]="i" class="method">
+  <p> <b>Method : {{i + 1}}</b> </p>
+  <div [formGroupName]="i">
+              <p>Method Name : <input type="text" formControlName="methodName"><label *ngIf="method.get('methodName').invalid && method.get('methodName').dirty" class = "error"> Method Name is required. </label><br/></p>
+	      <p>MethodReturnType : <input formControlName="methodReturnType"><label *ngIf="method.get('methodReturnType').invalid && method.get('methodReturnType').dirty" class = "error"> MethodReturnType is required. </label><br/></p>
+          <p>MethodCode : <input type="text" formControlName="methodCode"><label *ngIf="method.get('methodCode').invalid && method.get('methodCode').dirty" class = "error"> Method Code is required. </label><br/></p>
+          <p>Visibility : <input formControlName="visibility"><label *ngIf="method.get('visibility').invalid && method.get('visibility').dirty" class = "error"> Visibility is required. </label><br/></p>
+          <p>Modifier : <input formControlName="modifier"><label *ngIf="method.get('modifier').invalid && method.get('modifier').dirty" class = "error"> Modifier is required. </label><br/></p>
+	      
+	      <p><button type="button" (click)="deleteMethod(i)">Delete</button></p>
+	  </div>
+     </div>
+     <button type="button" (click)="addMethod()">Add More Method</button>
+   </div> <br/> -->
+   <div class="all-method">
+     <b><h1><font color="Olive"> Methods :</font></h1></b><br><br>
+     <div formArrayName="methods">
+
+      <div *ngFor="let method of methodFormArray.controls; let i=index" 
+            [formGroupName]="i">
+
+         <p><b>Method Name :</b> <input type="text" formControlName="methodName"><label *ngIf="method.get('methodName').invalid && method.get('methodName').dirty" class = "error"> Method Name is required. </label><br/></p>
+	      <p><b>MethodReturnType :</b> <input formControlName="methodReturnType"><label *ngIf="method.get('methodReturnType').invalid && method.get('methodReturnType').dirty" class = "error"> MethodReturnType is required. </label><br/></p>
+          <p><b>MethodCode :</b> <input type="text" formControlName="methodCode"><label *ngIf="method.get('methodCode').invalid && method.get('methodCode').dirty" class = "error"> Method Code is required. </label><br/></p>
+          <p><b>Visibility :</b> <input formControlName="visibility"><label *ngIf="method.get('visibility').invalid && method.get('visibility').dirty" class = "error"> Visibility is required. </label><br/></p>
+          <p><b>Modifier :</b> <input formControlName="modifier"><label *ngIf="method.get('modifier').invalid && method.get('modifier').dirty" class = "error"> Modifier is required. </label><br/></p>
+     
+
+          <button style="background-color:Silver" (click)="deleteMethod(i)">Delete</button>
+     
+      </div>
+  </div>
+ </div>
+  <button style="background-color:Gray" (click)="addMethod()">Add Method</button>
+  
+   <div class="all-import">
+     <b><h1> <font color="Olive">Imports :</font></h1></b><br><br>
+     <div formArrayName="imports"> 
+          <div *ngFor = "let import of importFormArray.controls; let i = index" [formGroupName]="i" class="import">
+	      <!-- <p> <b>Import : {{i + 1}}</b> </p> -->
+              <p><b>Imported Class :</b> <input formControlName="importedClass"><label *ngIf="import.get('importedClass').invalid && import.get('importedClass').dirty" class = "error"> Imported Class is required. </label><br/></p>
+	      
+	      
+	      <p><button type="button" style="background-color:Silver" (click)="deleteImport(i)">Delete</button></p>
+          <button type="button"  style="background-color:Gray"  (click)="addImport()">Add More Imports</button>
+	  </div>
+     </div>
+     
+   </div> <br/>
+   <button type="submit"  style="background-color: Green" >SUBMIT</button>
+ 
+<!-- </div>  -->
+<p><b>ClassForm:</b> {{ classForm.value | json }}</p>
+<p><b>ClassForm status:</b> {{ classForm.status }}</p>
+<p> {{error}}</p>
+</form>
